@@ -2,27 +2,29 @@
 import HelloWorld from './components/HelloWorld.vue'
 import TheWelcome from './components/TheWelcome.vue'
 import MyName from './components/MyName.vue'
+import JSON from './components/JSON.vue';
 </script>
 
 <template>
-  <header>
-    <img alt="Vue logo" class="logo" src="./assets/logo.svg" width="125" height="125" />
+  <!-- <header> -->
+    <!-- <img alt="Vue logo" class="logo" src="./assets/logo.svg" width="125" height="125" /> -->
 
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" />
+    <!-- <div class="wrapper"> -->
+      <!-- <HelloWorld msg="You did it!" /> -->
       <!-- <H msg="You did it!" /> -->
-      <MyName />
+      <!-- <MyName /> -->
 
-    </div>
-  </header>
+    <!-- </div> -->
+  <!-- </header> -->
+  <JSON />
 
-  <main>
-    <TheWelcome />
+  <!-- <main> -->
+    <!-- <TheWelcome /> -->
     
-  </main>
+  <!-- </main> -->
 </template>
 
-<style scoped>
+<!-- <style scoped>
 header {
   line-height: 1.5;
 }
@@ -49,6 +51,6 @@ header {
     flex-wrap: wrap;
   }
 }
-</style>
+</style> -->
 
 

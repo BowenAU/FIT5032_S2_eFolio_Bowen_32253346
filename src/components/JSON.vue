@@ -89,8 +89,8 @@ import { ref, computed } from "vue"
 
 // Activity 1: Import JSON files (authors.json and bookstores.json)
 // TODO: CODE TO IMPORT JSON FILES HERE
-import authors from "../assets/json/authors.json"
-import bookstores from "../assets/json/bookstores.json"
+import authors from "../assets/authors.json";
+import bookstores from "../assets/bookstores.json";
 
 const showMessage = ref(false)
 
