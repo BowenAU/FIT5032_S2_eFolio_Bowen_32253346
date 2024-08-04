@@ -12,6 +12,7 @@
     <!-- <h1 class="green">{{ msg }}</h1> -->
     <h3>
       Hello, I am Bowen.
+      Here is my Github account URL:<a href="https://github.com/BowenAU">BowenAU Github</a >
     </h3>
   </div>
 </template>
