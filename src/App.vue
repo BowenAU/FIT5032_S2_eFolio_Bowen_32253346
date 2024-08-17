@@ -8,7 +8,6 @@ import Form from "./components/Form.vue";
 
 <template>
 
-
   <Form />
 
 </template>
