@@ -63,26 +63,21 @@
       </div>
     </div>
     <div class="row mt-5" v-if="submittedCards.length">
-    <div class="d-flex flex-wrap justify-content-start">
-      <div v-for="(card, index) in submittedCards" :key="index" class="card m-2" style="width: 18rem;">
-         <div class="card-header">
-            User Information
-         </div>
-         <ul class="list-group list-group-flush">
-            <li class="list-group-item">Username: {{ card.username }}</li>
-            <li class="list-group-item">Password: {{ card.password }}</li>
-            <li class="list-group-item">Australian Resident: {{ card.isAustralian ? 'Yes' : 'No' }}</li>
-            <li class="list-group-item">Gender: {{ card.gender }}</li>
-            <li class="list-group-item">Reason: {{ card.reason }}</li>
-         </ul>
-      </div>
-   </div>
-</div>
-  </template>
+      <DataTable :value="submittedCards" tableStyle="min-width: 50rem">
+        <Column field="username" header="Username"></Column>
+        <Column field="password" header="Password"></Column>
+        <Column field="isAustralian" header="Australian Resident"></Column>
+        <Column field="gender" header="Gender"></Column>
+        <Column field="reason" header="Reason"></Column>
+      </DataTable>
+    </div>
+</template>
 
 <script setup>
 import { ref } from 'vue';
-  
+import DataTable from 'primevue/datatable';
+import Column from 'primevue/column';
+
   const formData = ref({
       username: '',
       password: '',
@@ -121,7 +116,7 @@ import { ref } from 'vue';
   const errors = ref({
     username: null,
     password: null,
-    resident: null,
+    isAustralian: null,
     gender: null,
     reason: null,
   });
@@ -144,7 +139,7 @@ import { ref } from 'vue';
   const hasSpecialChar = /[!@#$%^&*(),.?":{}|<>]/.test(password);
 
   if (password.length < minLength) {
-    if (blur) errors.value.password = Password must be at least ${minLength} characters long.;
+    if (blur) errors.value.password = `Password must be at least ${minLength} characters long.`;
   } else if (!hasUppercase) {
     if (blur) errors.value.password = "Password must contain at least one uppercase letter.";
   } else if (!hasLowercase) {
@@ -168,7 +163,7 @@ const validateIsAustralian = (blur) => {
   };
 
 const validateGender = (blur) => {
-    if (!formData.value.gender.length) {
+    if (!formData.value.gender) {
       if (blur) errors.value.gender = "Gender must be selected";
     } else {
       errors.value.gender = null;
