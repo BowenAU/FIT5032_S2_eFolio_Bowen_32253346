@@ -144,7 +144,7 @@ import { ref } from 'vue';
   const hasSpecialChar = /[!@#$%^&*(),.?":{}|<>]/.test(password);
 
   if (password.length < minLength) {
-    if (blur) errors.value.password = `Password must be at least ${minLength} characters long.`;
+    if (blur) errors.value.password = Password must be at least ${minLength} characters long.;
   } else if (!hasUppercase) {
     if (blur) errors.value.password = "Password must contain at least one uppercase letter.";
   } else if (!hasLowercase) {
