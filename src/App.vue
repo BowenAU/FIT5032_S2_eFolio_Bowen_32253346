@@ -43,4 +43,8 @@ import LibraryRegistrationForm from './components/LibraryRegistrationForm.vue'
     flex-wrap: wrap;
   }
 } */
+
+.about {
+  text-align: center;
+}
 </style>
