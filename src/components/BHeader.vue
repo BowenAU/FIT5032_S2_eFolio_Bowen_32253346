@@ -24,14 +24,13 @@
 </template>
 
 <script setup>
-import { useAuth } from '../router/authenticate'
-const { isAuthenticated } = useAuth()
+import { isAuthenticated } from '../router/authenticate'
 
 const logout = () => {
-    isAuthenticated.value = false
-    alert("Logout success")
-  }
-</script>   
+  isAuthenticated.value = false
+  alert('Logout success')
+}
+</script>
 
 <style scoped>
 .b-example-divider {
