@@ -47,9 +47,12 @@
 
 <script setup>
 import { ref } from 'vue'
+import router from '../router/index'
+import { useAuth } from '../router/authenticate'
     
-    const HardCodeUserName = 'user'
-    const HardCodepassword = '123456'
+const HardCodeUserName = 'user'
+const HardCodepassword = '123456'
+const {isAuthenticated} = useAuth()
 
 const formData = ref({
   username: '',
@@ -70,6 +73,9 @@ const submitForm = () => {
     // submittedCards.value.push({ ...formData.value })
     // clearForm()
     alert("Login success")
+    isAuthenticated.value = true
+    console.log("loginview,isAuthenticated.value")
+    router.push({name:'About'})
   }
 }
 

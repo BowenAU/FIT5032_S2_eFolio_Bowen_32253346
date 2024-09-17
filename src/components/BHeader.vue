@@ -15,10 +15,23 @@
         <li class="nav-item">
           <router-link to="/login" class="nav-link" active-class="active">Login</router-link>
         </li>
+        <li class="nav-item">
+          <button class="nav-link" active-class="active" @click="logout">Logout</button>
+        </li>
       </ul>
     </header>
   </div>
 </template>
+
+<script setup>
+import { useAuth } from '../router/authenticate'
+const { isAuthenticated } = useAuth()
+
+const logout = () => {
+    isAuthenticated.value = false
+    alert("Logout success")
+  }
+</script>   
 
 <style scoped>
 .b-example-divider {
