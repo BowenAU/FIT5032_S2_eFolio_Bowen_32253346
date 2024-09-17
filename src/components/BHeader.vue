@@ -9,13 +9,13 @@
             >Home (Week 5)</router-link
           >
         </li>
-        <li class="nav-item">
+        <li class="nav-item" v-if="isAuthenticated">
           <router-link to="/about" class="nav-link" active-class="active">About</router-link>
         </li>
-        <li class="nav-item">
+        <li class="nav-item" v-if="!isAuthenticated">
           <router-link to="/login" class="nav-link" active-class="active">Login</router-link>
         </li>
-        <li class="nav-item">
+        <li class="nav-item" v-if="isAuthenticated">
           <button class="nav-link" active-class="active" @click="logout">Logout</button>
         </li>
       </ul>
@@ -24,10 +24,12 @@
 </template>
 
 <script setup>
-import { isAuthenticated } from '../router/authenticate'
-
+import { setIsAuthenticated, isAuthenticated } from '../router/authenticate'
+import { useRouter } from 'vue-router'
+const router = useRouter()
 const logout = () => {
-  isAuthenticated.value = false
+  setIsAuthenticated(false)
+  router.push({ path: '/' })
   alert('Logout success')
 }
 </script>

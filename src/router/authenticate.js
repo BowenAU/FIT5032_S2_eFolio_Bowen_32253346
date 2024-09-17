@@ -10,3 +10,7 @@ export const login = () => {
 export const logout = () => {
   isAuthenticated.value = false
 }
+
+export const setIsAuthenticated = (params) => {
+  isAuthenticated.value = params
+}
