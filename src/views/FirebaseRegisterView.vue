@@ -2,7 +2,7 @@
     <div class="container">
       <div class="row mb-3 offset-md-4">
         <div class="col-md-6 col-sm-6">
-          <h2>💡 Firebase signin</h2>
+          <h2>💡 Create an account</h2>
           <p>
             <input type="text" placeholder="Email" v-model="email" />
           </p>
@@ -10,8 +10,8 @@
             <input type="password" placeholder="Password" v-model="password" />
           </p>
           <p>
-            <button type="button" class="btn btn-outline-primary" @click="fireSignin">
-              Sign in Firebase
+            <button type="button" class="btn btn-outline-primary" @click="register">
+              Save to Firebase
             </button>
           </p>
         </div>
@@ -22,30 +22,30 @@
 
 <script setup>
 import {ref} from "vue"
-import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import { useRouter } from "vue-router";
 
 const email = ref("")
 const password = ref("")
 const auth = getAuth();
 const router = useRouter()
-const fireSignin = () => {
+const register = () => {
     
-    signInWithEmailAndPassword(auth, email.value, password.value)
+    createUserWithEmailAndPassword(auth, email.value, password.value)
         .then((userCredential) => {
-        console.log("Login succeed!")
+        console.log("Registration succeed!")
         console.log("userCredential", userCredential)
         console.log("userCredential.user", userCredential.user)
-        alert("Congratulation! Login succeed!")
-        router.push('/')
+        alert("Congratulation! Registration succeed!")
+        router.push('/FireLogin')
     })
     .catch((error) => {
-        console.log("Login failed!")
+        console.log("Registration failed!")
         const errorCode = error.code;
         const errorMessage = error.message;
-        console.log("Login error code", errorCode)
-        console.log("Login error message", errorMessage)
-        alert("Sorry, Login failed, error message: " + errorMessage)
+        console.log("register error code", errorCode)
+        console.log("register error message", errorMessage)
+        alert("Sorry, Registration failed, error message: " + errorMessage)
     });
 }
 
