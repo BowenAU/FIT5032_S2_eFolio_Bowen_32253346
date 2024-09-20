@@ -29,15 +29,26 @@ const email = ref("")
 const password = ref("")
 const auth = getAuth();
 const router = useRouter()
+
+const adminEmail = "admin@gmail.com"
 const fireSignin = () => {
     
     signInWithEmailAndPassword(auth, email.value, password.value)
         .then((userCredential) => {
+            if (userCredential.user.email == adminEmail)
+        {
+            alert("Hello, admin!")
+            router.push('/Login')
+        }
+        else
+        {
+            alert("Congratulation! Login succeed!")
+            router.push('/')
+        }
         console.log("Login succeed!")
         console.log("userCredential", userCredential)
         console.log("userCredential.user", userCredential.user)
-        alert("Congratulation! Login succeed!")
-        router.push('/')
+        console.log("auth", auth)
     })
     .catch((error) => {
         console.log("Login failed!")
