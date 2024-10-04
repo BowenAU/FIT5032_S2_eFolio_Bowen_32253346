@@ -10,22 +10,31 @@
           >
         </li>
         <li class="nav-item" v-if="isAuthenticated">
+          <router-link to="/addBook" class="nav-link" active-class="active">Add Book</router-link>
+        </li>
+        <li class="nav-item" v-if="isAuthenticated">
           <router-link to="/about" class="nav-link" active-class="active">About</router-link>
         </li>
         <li class="nav-item" v-if="!isAuthenticated">
           <router-link to="/login" class="nav-link" active-class="active">Login</router-link>
         </li>
         <li class="nav-item">
-          <router-link to="/FireLogin" class="nav-link" active-class="active">Firebase Login</router-link>
+          <router-link to="/FireLogin" class="nav-link" active-class="active"
+            >Firebase Login</router-link
+          >
         </li>
         <li class="nav-item">
-          <router-link to="/FireRegister" class="nav-link" active-class="active">Firebase Register</router-link>
+          <router-link to="/FireRegister" class="nav-link" active-class="active"
+            >Firebase Register</router-link
+          >
         </li>
         <li class="nav-item">
           <button class="nav-link" @click="FirebaseLogout">Firebase Logout</button>
         </li>
         <li class="nav-item" v-if="isAuthenticated">
-          <button type="button" class="nav-link" active-class="active" @click="logout">Logout</button>
+          <button type="button" class="nav-link" active-class="active" @click="logout">
+            Logout
+          </button>
         </li>
       </ul>
     </header>
@@ -33,7 +42,7 @@
 </template>
 
 <script setup>
-import { getAuth, signOut } from 'firebase/auth';
+import { getAuth, signOut } from 'firebase/auth'
 import { setIsAuthenticated, isAuthenticated } from '../router/authenticate'
 import { useRouter } from 'vue-router'
 
@@ -45,14 +54,16 @@ const logout = () => {
 }
 
 const auth = getAuth()
-const FirebaseLogout = ()=>{
-  signOut(auth).then(() => {
-    // Sign-out successful.
-    alert("Sign out successful")
-  }).catch((error) => {
-    // An error just happened.
-    console.log("logout error", error)
-  });
+const FirebaseLogout = () => {
+  signOut(auth)
+    .then(() => {
+      // Sign-out successful.
+      alert('Sign out successful')
+    })
+    .catch((error) => {
+      // An error just happened.
+      console.log('logout error', error)
+    })
 }
 </script>
 
