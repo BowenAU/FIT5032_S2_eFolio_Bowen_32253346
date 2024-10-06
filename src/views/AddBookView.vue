@@ -8,7 +8,7 @@
         </div>
         <div>
           <label for="name">Name:</label>
-          <input type="number" v-model="name" id="name" required />
+          <input type="text" v-model="name" id="name" required />
         </div>
         <button type="submit">Add Book</button>
       </form>

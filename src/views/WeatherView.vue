@@ -37,7 +37,27 @@
   const iconUrl = ref('');
   const temperature = ref('');
   const apikey = "7757eb2f08fb9386523b8003ee7941cc";
-  const searchByCity = () => {
+  const searchByCity = async () => {
+    try {
+          const responseLocation = await axios.get(`https://api.openweathermap.org/geo/1.0/direct?q=${city.value}&appid=${apikey}`);
+          //Returned data from API is stored as JSON file in weatherData
+          console.log("Response Location: ", responseLocation.data[0]);
+          const lat = responseLocation.data[0].lat
+          const lon = responseLocation.dat[0].lon
+          console.log("lat", lat)
+          const url = `http://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apikey}`;
+            //await means wait for the fetchWeatherData method to complete before proceeding
+          await fetchWeatherData(url);
+        //   weatherData.value = responseLocation.data;
+        //   iconUrl.value = response.data
+        //   ? `http://api.openweathermap.org/img/w/${response.data.weather[0].icon}.png`
+        //   : null;
+        //   temperature.value = response.data
+        //   ? Math.floor(response.data.main.temp - 273)
+        //   : null; 
+        } catch (error) {
+          console.error("Response location error:", error);
+        }
 
   }
 
@@ -54,21 +74,8 @@
           });
         }
       }
-    const fetchWeatherData = async (url) => {
-        try {
-          const response = await axios.get(url);
-          //Returned data from API is stored as JSON file in weatherData
-          console.log("Weather response: ", response.data);
-          weatherData.value = response.data;
-          iconUrl.value = response.data
-          ? `http://api.openweathermap.org/img/w/${response.data.weather[0].icon}.png`
-          : null;
-          temperature.value = response.data
-          ? Math.floor(response.data.main.temp - 273)
-          : null; 
-        } catch (error) {
-          console.error("Error fetching weather data:", error);
-        }
+    const fetchWeatherData = async () => {
+
       }
       fetchCurrentLocationWeather();
 

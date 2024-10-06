@@ -1,14 +1,31 @@
 <script setup>
-import JSONLab from './components/JSONLab.vue'
+// import HelloWorld from './components/HelloWorld.vue'
+// import TheWelcome from './components/TheWelcome.vue'
+// import JSON from './components/JSON.vue'
+// import Form from './components/Form.vue'
+//import router from './router/index'
+import { computed } from 'vue'
 import BHeader from './components/BHeader.vue'
-import LibraryRegistrationForm from './components/LibraryRegistrationForm.vue'
+import { useRouter } from 'vue-router'
+
+const router = useRouter();
+const showHeader = computed(() => {
+    // TODO: CODE TO FIND AUTHOR BY NAME HERE
+    console.log("router1", router.currentRoute)
+    console.log("router2", router.currentRoute.value.name)
+    return router.currentRoute.value.name !== 'CountBookAPI'
+})
+
 </script>
 
+
+
 <template>
-  <header>
+  <div>
+  <header v-if="showHeader">
     <BHeader />
   </header>
-
+</div>
   <main>
     <!-- <LibraryRegistrationForm /> -->
     <!-- <JSONLab /> -->
