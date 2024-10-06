@@ -9,6 +9,9 @@
             >Home (Week 5)</router-link
           >
         </li>
+        <li class="nav-item">
+          <router-link to="/GetBookCount" class="nav-link" active-class="active">Get Book Count</router-link>
+        </li>
         <li class="nav-item" v-if="isAuthenticated">
           <router-link to="/booklist" class="nav-link" active-class="active">Book List</router-link>
         </li>
