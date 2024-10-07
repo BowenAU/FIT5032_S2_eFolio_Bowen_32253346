@@ -38,7 +38,20 @@ const weatherData = ref('');
 const iconUrl = ref('');
 const temperature = ref('');
 const apikey = "7757eb2f08fb9386523b8003ee7941cc";
-const searchByCity = () => {
+const searchByCity =async () => {
+    try {
+          const responseLocation = await axios.get(`https://api.openweathermap.org/geo/1.0/direct?q=${city}&appid=${apikey}`);
+          //Returned data from API is stored as JSON file in weatherData
+          console.log("Response Location: ", responseLocation.data[0]);
+          const lat = responseLocation.data[0].lat
+          const lon = responseLocation.data[0].lon
+          console.log("lat", lat)
+          const url = `http://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apikey}`;
+            //await means wait for the fetchWeatherData method to complete before proceeding
+        await fetchWeatherData(url);
+        } catch (error) {
+          console.error("Response Location error:", error);
+        }
 
 }
 
