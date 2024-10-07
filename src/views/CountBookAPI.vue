@@ -11,9 +11,9 @@
   
   const getBookCount = async () => {
     try {
-      const response = await axios.get('https://countbooks-256iojhqdq-uc.a.run.app/');  
+      const response = await axios.get('https://countbooks-256iojhqdq-uc.a.run.app/countbooks');  
       console.log("response", response.data);
-      count.value = response.data.count;  
+      count.value = response.data;  
     } catch (err) {
       console.error("Error: ", err);
       error.value = err;

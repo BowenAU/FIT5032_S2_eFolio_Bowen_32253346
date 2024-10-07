@@ -10,7 +10,6 @@ import { useRouter } from 'vue-router'
 
 const router = useRouter();
 const showHeader = computed(() => {
-    // TODO: CODE TO FIND AUTHOR BY NAME HERE
     console.log("router1", router.currentRoute)
     console.log("router2", router.currentRoute.value.name)
     return router.currentRoute.value.name !== 'CountBookAPI'
