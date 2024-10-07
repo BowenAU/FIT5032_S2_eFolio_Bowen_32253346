@@ -1,8 +1,8 @@
 <template>
     <div>
       <h1>Weather API</h1>
-      <input type="text" v-model="city" id="city" placeholder="Enter city name" class="search-input">
-      <button @click="searchByCity" type="submit">search</button>
+      <input type="text" v-model="city" id="city" placeholder="Enter city name" class="search-input required" />
+      <button @click="searchByCity" type="submit">Search</button>
             <!--The <main> tag in HTML is used to specify the main content of a document 
       More info about main, check https://www.w3schools.com/tags/tag_main.asp-->  
       <main>
@@ -24,44 +24,25 @@
           <span>{{ weatherData.weather[0].description }}</span>
         </div>
       </main>
+
     </div>
 
   </template>
 
   <script setup>
-  import { ref } from 'vue';
-  import axios from "axios";
+import { ref } from 'vue';
+import axios from "axios";
 
-  const city = ref('');
-  const weatherData = ref('');
-  const iconUrl = ref('');
-  const temperature = ref('');
-  const apikey = "7757eb2f08fb9386523b8003ee7941cc";
-  const searchByCity = async () => {
-    try {
-          const responseLocation = await axios.get(`https://api.openweathermap.org/geo/1.0/direct?q=${city.value}&appid=${apikey}`);
-          //Returned data from API is stored as JSON file in weatherData
-          console.log("Response Location: ", responseLocation.data[0]);
-          const lat = responseLocation.data[0].lat
-          const lon = responseLocation.dat[0].lon
-          console.log("lat", lat)
-          const url = `http://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apikey}`;
-            //await means wait for the fetchWeatherData method to complete before proceeding
-          await fetchWeatherData(url);
-        //   weatherData.value = responseLocation.data;
-        //   iconUrl.value = response.data
-        //   ? `http://api.openweathermap.org/img/w/${response.data.weather[0].icon}.png`
-        //   : null;
-        //   temperature.value = response.data
-        //   ? Math.floor(response.data.main.temp - 273)
-        //   : null; 
-        } catch (error) {
-          console.error("Response location error:", error);
-        }
+const city = ref(''); 
+const weatherData = ref('');
+const iconUrl = ref('');
+const temperature = ref('');
+const apikey = "7757eb2f08fb9386523b8003ee7941cc";
+const searchByCity = () => {
 
-  }
+}
 
-   const fetchCurrentLocationWeather = async() => {
+const fetchCurrentLocationWeather = async() => {
         //The navigator.geolocation object is part of the Web API provided by modern web browsers
         //Please note this function is not belongs to Vue or openweather.
         if (navigator.geolocation) {
@@ -74,10 +55,23 @@
           });
         }
       }
-    const fetchWeatherData = async () => {
+const fetchWeatherData = async (url) => {
+        try {
+          const response = await axios.get(url);
+          //Returned data from API is stored as JSON file in weatherData
+          console.log("Weather response: ", response.data);
+          weatherData.value = response.data;
+          iconUrl.value = response.data
+          ? `http://api.openweathermap.org/img/w/${response.data.weather[0].icon}.png`
+          : null;
+          temperature.value = response.data
+          ? Math.floor(response.data.main.temp - 273)
+          : null;
 
+        } catch (error) {
+          console.error("Error fetching weather data:", error);
+        }
       }
-      fetchCurrentLocationWeather();
-
+      fetchCurrentLocationWeather()
 
   </script>
