@@ -10,7 +10,7 @@
           <label for="name">Name:</label>
           <input type="text" v-model="name" id="name" required />
         </div>
-        <button type="submit">Add Book</button>
+        <button type="submit">Edit Book</button>
       </form>
     </div>
 
@@ -19,12 +19,16 @@
   import { ref } from 'vue';
   import db from '../firebase/init.js';
   import { setDoc, getDoc, doc } from 'firebase/firestore';
+  import { useRoute } from 'vue-router'
   
       const isbn = ref('');
       const name = ref('');
+      const bookId = useRoute().params.bookid
+      console.log("Manage book get route param: " + bookId)
+
       const getBook = async () => {
         try{ 
-          const docRef = doc(db, "books", "4RQ9nd8Q7VJve1hslNax");
+          const docRef = doc(db, "books", bookId);
           const docSnap = await getDoc(docRef);
 
             if (docSnap.exists()) {
@@ -50,13 +54,13 @@
           
         //   const cityRef = doc(db, 'cities', 'BJ');
         //   await setDoc(cityRef, { capital: true }, { merge: true});
-          await setDoc(doc(db, 'books', '4RQ9nd8Q7VJve1hslNax'), {
+          await setDoc(doc(db, 'books', bookId), {
             isbn: Number(isbn.value),
             name: name.value
           });
           isbn.value = '';
           name.value = '';
-          alert('Book added successfully!');
+          alert('Book edited successfully!');
         } catch (error) {
           console.error('Error adding book: ', error);
         }

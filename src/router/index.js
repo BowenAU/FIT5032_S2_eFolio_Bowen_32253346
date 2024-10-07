@@ -40,7 +40,7 @@ const routes = [
     component: GetBookCountView
   },
   {
-    path: '/bookManage',
+    path: '/bookManage/: bookid',
     name: 'BookManage',
     component: BookManageView
   },

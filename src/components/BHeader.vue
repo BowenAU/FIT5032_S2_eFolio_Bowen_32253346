@@ -27,9 +27,9 @@
         <li class="nav-item">
           <router-link to="/addbook" class="nav-link" active-class="active">Add Book</router-link>
         </li>
-        <li class="nav-item">
+        <!-- <li class="nav-item">
           <router-link to="/bookManage" class="nav-link" active-class="active">Book Manage</router-link>
-        </li>
+        </li> -->
         <li class="nav-item">
           <router-link to="/about" class="nav-link" active-class="active">About</router-link>
         </li>
