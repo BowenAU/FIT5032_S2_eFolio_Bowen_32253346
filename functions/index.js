@@ -27,6 +27,24 @@ exports.countBooks = onRequest((req, res) => {
   });
 });
 
+exports.getAllBooks = onRequest((req, res) => {
+  cors(req, res, async () => {
+    try {
+      const booksCollection = await admin.firestore().collection("books").get();
+      console.log("book collections snapshot", booksCollection);
+      const response = [];
+      booksCollection.forEach((doc) => {
+        response.push({...doc.data()});
+      });
+      res.status(200).send({response});
+    } catch (error) {
+      console.error("Error get books:", error);
+      res.status(500).send("Server Error get all books.");
+    }
+  });
+});
+
+
 exports.addBook = onRequest((req, res) => {
   cors(req, res, async () => {
     try {

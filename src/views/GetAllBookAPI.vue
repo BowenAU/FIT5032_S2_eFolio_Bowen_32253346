@@ -1,25 +1,29 @@
 <template>
-    <pre>{{ count }}</pre>
+    <div>
+      <h1>All Books Information</h1>
+      <pre v-if="books">{{ books }}</pre>
+      <p v-if="error" class="error">{{ error }}</p>
+    </div>
   </template>
   
   <script setup>
   import axios from 'axios';
   import { ref } from 'vue';
   
-  const count = ref('');
-  const error = ref('');
+
+  const books = ref(null); 
+  const error = ref('');  
   
-  const getBookCount = async () => {
+  const getAllBooks = async () => {
     try {
-      const response = await axios.get('https://countbooks-256iojhqdq-uc.a.run.app/');  
-      console.log("response", response.data);
-      count.value = response.data.count;  
+      const response = await axios.get('https://getallbooks-256iojhqdq-uc.a.run.app');
+      books.value = JSON.stringify(response.data, null, 2);
     } catch (err) {
-      console.error("Error: ", err);
-      error.value = err;
-      count.value = null;
+      console.error("Error fetching book data: ", err);
+      error.value = "Error fetching book data: " + err.message;
     }
   };
 
-  getBookCount()
-  </script> 
+  getAllBooks();
+  </script>
+  
