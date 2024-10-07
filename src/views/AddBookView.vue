@@ -17,30 +17,23 @@
   </template>
   <script setup>
   import { ref } from 'vue';
-  import db from '../firebase/init.js';
-  import { collection, addDoc } from 'firebase/firestore';
+  // import db from '../firebase/init.js';
+  // import { collection, addDoc } from 'firebase/firestore';
+  import axios from 'axios';
   
-      const isbn = ref('');
-      const name = ref('');
+  const isbn = ref('');
+  const name = ref(''); 
   
-      const addBook = async () => {
-          try{
-          if (isNaN(Number(isbn.value))) {
-            alert('ISBN must be a valid number');
-            return;
-          }
-  
-          await addDoc(collection(db, 'books'), {
-            isbn: Number(isbn.value),
-            name: name.value
-          });
-          isbn.value = '';
-          name.value = '';
-          alert('Book added successfully!');
-        } catch (error) {
-          console.error('Error adding book: ', error);
-        }
-      };
+  const addBook = async () => {
+        try {
+      const response = await axios.post('https://addbook-256iojhqdq-uc.a.run.app', 
+      { isbn: isbn.value, name: name.value });  
+      console.log("response", response.data);
+      alert("Book added successfully!") 
+    } catch (err) {
+      console.error("Error: ", err);
+    }
+  };
   
 
 

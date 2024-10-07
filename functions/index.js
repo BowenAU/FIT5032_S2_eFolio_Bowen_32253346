@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 /**
  * Import function triggers from their respective submodules:
  *
@@ -26,7 +27,18 @@ exports.countBooks = onRequest((req, res) => {
   });
 });
 
-
+exports.addBook = onRequest((req, res) => {
+  cors(req, res, async () => {
+    try {
+      const {isbn, name} = req.body;
+      await admin.firestore().collection("books").add({isbn: isbn, name: name.toUpperCase()});
+      res.status(200).send("Book added successfully!");
+    } catch (error) {
+      console.error("Error counting books:", error);
+      res.status(500).send("Server Error add books.");
+    }
+  });
+});
 
 // Create and deploy your first functions
 // https://firebase.google.com/docs/functions/get-started
