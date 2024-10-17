@@ -8,23 +8,20 @@ import { computed } from 'vue'
 import BHeader from './components/BHeader.vue'
 import { useRouter } from 'vue-router'
 
-const router = useRouter();
+const router = useRouter()
 const showHeader = computed(() => {
-    console.log("router1", router.currentRoute)
-    console.log("router2", router.currentRoute.value.name)
-    return router.currentRoute.value.name !== 'CountBookAPI'
+  console.log('router1', router.currentRoute)
+  console.log('router2', router.currentRoute.value.name)
+  return router.currentRoute.value.name !== 'CountBookAPI'
 })
-
 </script>
-
-
 
 <template>
   <div>
-  <header v-if="showHeader">
-    <BHeader />
-  </header>
-</div>
+    <header v-if="showHeader">
+      <BHeader />
+    </header>
+  </div>
   <main>
     <!-- <LibraryRegistrationForm /> -->
     <!-- <JSONLab /> -->
