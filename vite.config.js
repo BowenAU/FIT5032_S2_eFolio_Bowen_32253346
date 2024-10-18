@@ -14,5 +14,9 @@ export default defineConfig({
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url))
     }
-  }
+  },
+  publicPath: process.env.NODE_ENV === 'production'
+  ? '/FIT5032_S2_eFolio_Bowen_32253346/'
+  : '/'
 })
+
